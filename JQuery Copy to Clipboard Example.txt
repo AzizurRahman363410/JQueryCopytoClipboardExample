@@ -1,0 +1,93 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+---------------------------------------------------------------------------------------------------------------------------
+#######   Include in Html Body section it will work for Div, H1,h2...,P ####
+
+<div id="div_1">
+  Hey, My Name is Shakil
+</div>
+<a id="div_2" href="#" name="copy_pre">Copy Contents</a>
+
+
+#######   Include in Script Block ####
+
+<script> 
+$(document).ready(function(){
+$(document).ready(function(){
+  $("#div_2").click(function() {
+
+    var el = document.getElementById("div_1");
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    document.execCommand('copy');
+    alert("Contents copied to clipboard.");
+    // return false;
+  });
+});
+
+ });
+  </script>
+
+-------------------------------------------------------------------------------------------------------------------------------------
+******   For All in one Script -----> Div, H1,h2...,P  Include in Html Body section Remember all div id and element id are same ******
+
+<div id="div_1">
+	This is the first content we want to select and copy to the clipboard.
+</div>
+<a id="div_1" href="#" name="copy_pre">Copy Contents</a>
+<div id="div_2">
+	This is the second content we want to select and copy to the clipboard.
+</div>
+<a id="div_2" href="#" name="copy_pre">Copy Contents</a>
+
+
+
+
+***  Include in Script Block ***
+<script>
+$(document).ready(function(){
+	$("a[name=copy_pre]").click(function() {
+		var id = $(this).attr('id');
+		var el = document.getElementById(id);
+		var range = document.createRange();
+		range.selectNodeContents(el);
+		var sel = window.getSelection();
+		sel.removeAllRanges();
+		sel.addRange(range);
+		document.execCommand('copy');
+		alert("Contents copied to clipboard.");
+		return false;
+	});
+});
+</script>
+
+-------------------------------------------------------------------------------------------------------------------------------------
+******   inline copy input  ******
+<input readonly type="text" value="Click Me To Copy" class="allowCopy noselect">
+
+***  Include in Script Block ***
+
+$(function() {
+   $('.allowCopy').click(function() {
+     $(this).focus();
+     $(this).select();
+     document.execCommand('copy');
+   });
+});
+
+-------------------------------------------------------------------------------------------------------------------------------------
+******   copy full textarea input   ******
+<textarea name="" id="textareaId" cols="30" rows="10" placeholder="message"></textarea>
+<button id="textareaBtn">Copy</button>
+
+***  Include in Script Block ***
+
+  $("#textareaBtn").click(function(){
+    $("#textareaId").select();
+    document.execCommand('copy');
+    alert('textarea')
+});
